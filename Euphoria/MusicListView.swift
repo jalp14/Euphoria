@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MusicListView.swift
 //  Euphoria
 //
 //  Created by Jalp on 09/10/2018.
@@ -8,13 +8,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MusicListView: UITableViewController {
+    
+    var music : [Music] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+    }
+    
+    func createArray() -> [Music] {
+        
     }
 
 
 }
-
