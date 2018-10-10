@@ -13,7 +13,10 @@ class MusicCell: UITableViewCell {
     @IBOutlet weak var musicImageView: UIImageView!
     @IBOutlet weak var musicTitleLabel: UILabel!
     
-    
+    func setMusic(music : Music){
+        musicImageView.image = music.image
+        musicTitleLabel.text = music.title
+    }
     
     
     
