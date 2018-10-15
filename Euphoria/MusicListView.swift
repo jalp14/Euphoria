@@ -15,13 +15,19 @@ class MusicListView: UIViewController {
     @IBOutlet weak var tableView: UITableView!
      
     var music : [Music] = []
-    let songQuery = MPMediaQuery.songs()
+    var songQuery = MPMediaQuery.songs()
     var songList : [MPMediaItem]!
+    var musicPlayer = MPMusicPlayerController.applicationMusicPlayer
+    var currentIndex = 0;
+    var currentTitle = ""
+    var currentId = 0
+    var songPredicate = MPMediaPropertyPredicate()
+
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         requestAccess()
-        
         music = createArray()
         tableView.delegate = self
         tableView.dataSource = self
@@ -54,8 +60,28 @@ class MusicListView: UIViewController {
         
         for song in songList {
             print(song.title)
-        
         }
+    }
+    
+    func findMusic(id : Int) -> String {
+        
+        currentTitle = songList[id].title!
+        return currentTitle
+    }
+    
+    func playSong(title : String) {
+        songPredicate = MPMediaPropertyPredicate(value: title, forProperty: MPMediaItemPropertyTitle)
+        songQuery.addFilterPredicate(songPredicate)
+    
+        if (songQuery.items?.count)! < 1 {
+            print("Song not found")
+            return
+        } else {
+            print("Playing now")
+        }
+        songList = songQuery.items! as [MPMediaItem]
+       musicPlayer.setQueue(with: MPMediaItemCollection(items: songList))
+        musicPlayer.play()
     }
     
     
@@ -70,8 +96,12 @@ class MusicListView: UIViewController {
         }
         return tempMusic
     }
+    
+    
+   
 
 }
+
 
 extension MusicListView: UITableViewDataSource, UITableViewDelegate {
     
@@ -88,5 +118,19 @@ extension MusicListView: UITableViewDataSource, UITableViewDelegate {
         
          return cell
     }
-}
+    
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("didSelect  \(indexPath.row)")
+        currentTitle = findMusic(id: indexPath.row)
+        print(currentTitle)
+        playSong(title: currentTitle)
+     }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        songQuery.removeFilterPredicate(songPredicate)
+        songList = songQuery.items!
+    }
+        
+    }
+
 

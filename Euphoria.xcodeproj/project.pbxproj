@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A23C99DA216DF75500D12278 /* album artwork in Resources */ = {isa = PBXBuildFile; fileRef = A23C99D9216DF75500D12278 /* album artwork */; };
 		A252C495216CB2FA00FFA8D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A252C494216CB2FA00FFA8D3 /* AppDelegate.swift */; };
 		A252C49A216CB2FA00FFA8D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A252C498216CB2FA00FFA8D3 /* Main.storyboard */; };
 		A252C49C216CB2FE00FFA8D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A252C49B216CB2FE00FFA8D3 /* Assets.xcassets */; };
@@ -18,7 +17,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A23C99D9216DF75500D12278 /* album artwork */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "album artwork"; sourceTree = "<group>"; };
 		A252C491216CB2FA00FFA8D3 /* Euphoria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Euphoria.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A252C494216CB2FA00FFA8D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A252C499216CB2FA00FFA8D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -63,7 +61,6 @@
 				A252C494216CB2FA00FFA8D3 /* AppDelegate.swift */,
 				A252C4A6216CC0ED00FFA8D3 /* MusicListView.swift */,
 				A252C4A8216CC43900FFA8D3 /* MusicCell.swift */,
-				A23C99D9216DF75500D12278 /* album artwork */,
 				A252C4AA216CC50900FFA8D3 /* Music.swift */,
 				A252C498216CB2FA00FFA8D3 /* Main.storyboard */,
 				A252C49B216CB2FE00FFA8D3 /* Assets.xcassets */,
@@ -131,7 +128,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A23C99DA216DF75500D12278 /* album artwork in Resources */,
 				A252C49F216CB2FE00FFA8D3 /* LaunchScreen.storyboard in Resources */,
 				A252C49C216CB2FE00FFA8D3 /* Assets.xcassets in Resources */,
 				A252C49A216CB2FA00FFA8D3 /* Main.storyboard in Resources */,
