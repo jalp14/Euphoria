@@ -83,7 +83,7 @@
 		A2551E49219F3BEF004DB89A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A2EEE30921861B2C0061CEED /* NowPlayingView.swift */,
+				A252C498216CB2FA00FFA8D3 /* Main.storyboard */,
 				A252C49D216CB2FE00FFA8D3 /* LaunchScreen.storyboard */,
 			);
 			path = View;
@@ -92,9 +92,9 @@
 		A2551E4A219F3BF6004DB89A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A252C498216CB2FA00FFA8D3 /* Main.storyboard */,
 				A2551E4E219F4190004DB89A /* RoundedPlayer.swift */,
 				A252C4A8216CC43900FFA8D3 /* MusicCell.swift */,
+				A2EEE30921861B2C0061CEED /* NowPlayingView.swift */,
 				A2B4F1F9219F7130005944A2 /* MusicListView.swift */,
 			);
 			path = Controller;

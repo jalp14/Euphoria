@@ -15,14 +15,12 @@ class MusicListView: UIViewController {
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.rowHeight = UITableView.automaticDimension
-            // tableView.estimatedRowHeight = 44.0
-            // tableView.separatorStyle = .none
         }
     }
     
-    @IBOutlet weak var floatingPlayer: RoundedPlayer!
-    
     @IBOutlet weak var currentAlbumImage: UIImageView!
+    
+    @IBOutlet weak var floatingPlayer : UIView!
     
     @IBOutlet weak var currentPlayingTitle: UILabel!
     
@@ -61,7 +59,6 @@ class MusicListView: UIViewController {
     var artworkSize = CGSize(width: 49, height: 49)
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         requestAccess()
@@ -71,7 +68,7 @@ class MusicListView: UIViewController {
         tableView.dataSource = self
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
-    
+
     
     func roundImages(image : UIImageView) {
         image.layer.cornerRadius = 6.0
@@ -104,14 +101,12 @@ class MusicListView: UIViewController {
     
     func accessMusicLibrary(){
         songList = songQuery.items! as [MPMediaItem]
-        
         for song in songList {
             print(song.title)
         }
     }
     
     func findMusic(id : Int) -> String {
-        
         currentTitle = songList[id].title!
         return currentTitle
     }
@@ -142,16 +137,16 @@ class MusicListView: UIViewController {
     
     
     func createArray() -> [Music] {
-        
         var tempMusic : [Music] = []
-        
-        
         for song in songList {
             tempMusic.append(Music(image: (song.artwork?.image(at: artworkSize))!, title: song.title!))
         }
         return tempMusic
     }
 }
+
+
+
 
 extension MusicListView: UITableViewDataSource, UITableViewDelegate {
     
@@ -161,15 +156,11 @@ extension MusicListView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let musicCell = music[indexPath.row]
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "MusicCell") as! MusicCell
-        
         cell.setMusic(music: musicCell)
         cell.roundImages()
-        
         cell.clipsToBounds = false
         cell.selectionStyle = .none
-        
         return cell
     }
     
@@ -178,9 +169,6 @@ extension MusicListView: UITableViewDataSource, UITableViewDelegate {
         print("didSelect  \(indexPath.row)")
         currentTitle = findMusic(id: indexPath.row)
         print(currentTitle)
-        
-        
-        
         playSong(title: currentTitle, albumArtwork: (songList[indexPath.row].artwork?.image(at: artworkSize))!)
     }
     
@@ -188,7 +176,6 @@ extension MusicListView: UITableViewDataSource, UITableViewDelegate {
         songQuery.removeFilterPredicate(songPredicate)
         songList = songQuery.items!
     }
-    
     
 }
 
