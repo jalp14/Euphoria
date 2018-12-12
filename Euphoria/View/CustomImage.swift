@@ -22,11 +22,16 @@ class CustomImage: UIImageView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        // Shady stuff
+        self.layer.shadowColor = UIColor.darkGray.cgColor
+        self.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
+        self.layer.shadowOpacity = 0.9
+        self.layer.shadowRadius = 4.0
+        
+        // Radii stuff
         self.layer.cornerRadius = 9.0
-        self.layer.shadowRadius = 0.5
-        self.layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 9.0).cgPath
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.clipsToBounds = true
+        self.layer.masksToBounds = false
     }
 
 }

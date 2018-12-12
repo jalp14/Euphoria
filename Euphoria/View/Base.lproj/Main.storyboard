@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QtF-vD-zfP" customClass="CustomImage" customModule="Euphoria" customModuleProvider="target">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QtF-vD-zfP" customClass="CustomImage" customModule="Euphoria" customModuleProvider="target">
                                 <rect key="frame" x="35" y="50" width="250" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="QtF-vD-zfP" secondAttribute="height" multiplier="1:1" id="rWk-Ae-rL9"/>
@@ -37,6 +37,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="QtF-vD-zfP" firstAttribute="leading" secondItem="j43-aU-LAo" secondAttribute="leading" constant="35" id="DCi-9g-Vw2"/>
                             <constraint firstItem="QtF-vD-zfP" firstAttribute="top" secondItem="j43-aU-LAo" secondAttribute="top" constant="30" id="Iwc-qu-wFm"/>
@@ -44,6 +45,9 @@
                             <constraint firstItem="QtF-vD-zfP" firstAttribute="centerX" secondItem="Mj1-Ti-5ui" secondAttribute="centerX" id="qlK-oH-nMk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="j43-aU-LAo"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="B2g-uP-h3O" appends="YES" id="9Vy-Hd-AW0"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="albumArtwork" destination="QtF-vD-zfP" id="oan-X0-nVM"/>
@@ -51,6 +55,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5eX-46-0gT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="B2g-uP-h3O">
+                    <connections>
+                        <action selector="dismissNowPlayingUI:" destination="cb9-R9-NSV" id="piu-zT-FJW"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-534.375" y="-417.25352112676057"/>
         </scene>

@@ -11,9 +11,31 @@ import UIKit
 
 class NowPlayingViewController : UIViewController {
     
-
     @IBOutlet weak var albumArtwork: UIImageView!
     @IBOutlet weak var currentTrack: UILabel!
+    
+    var initialTouchPoint : CGPoint = CGPoint(x: 0, y: 0)
+    
+    @IBAction func dismissNowPlayingUI(_ sender: UIPanGestureRecognizer) {
+     let touchPoint = sender.location(in: self.view.window)
+        
+        // Check if the state of the gesture changes
+        if sender.state == UIGestureRecognizer.State.began {
+            initialTouchPoint = touchPoint
+        } else if sender.state == UIGestureRecognizer.State.changed {
+            if touchPoint.y - initialTouchPoint.y > 100 {
+            self.view.frame = CGRect(x: 0, y: touchPoint.y - initialTouchPoint.y, width: self.view.frame.width, height: self.view.frame.height)
+            }
+        } else if sender.state == UIGestureRecognizer.State.ended || sender.state == UIGestureRecognizer.State.cancelled {
+            if touchPoint.y - initialTouchPoint.y > 100 {
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+                    })
+            }
+        }
+    }
     
     var track : String = "Not Playing"
     var album : UIImage = UIImage()
@@ -26,7 +48,7 @@ class NowPlayingViewController : UIViewController {
 
      required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
     }
+    
     
 }
