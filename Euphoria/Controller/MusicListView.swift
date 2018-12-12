@@ -25,12 +25,12 @@ class MusicListView: UIViewController {
     @IBOutlet weak var currentPlayingTitle: UILabel!
     
     @IBAction func mediaButton(_ sender: UIButton) {
-        if (musicPlayer.isPreparedToPlay) {
-            if (musicPlayer.playbackState == .playing) {
-                musicPlayer.stop()
+        if (audioPlayer.prepareToPlay()) {
+            if (audioPlayer.isPlaying) {
+                audioPlayer.pause()
                 sender.setImage(#imageLiteral(resourceName: "play"), for: .normal)
-            } else if (musicPlayer.playbackState == .paused) {
-                musicPlayer.play()
+            } else if !(audioPlayer.isPlaying) {
+                audioPlayer.play()
                 sender.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
             }
         }
@@ -38,25 +38,21 @@ class MusicListView: UIViewController {
     
     @IBOutlet weak var mediaButtonStatic: UIButton!
     
-    @IBOutlet weak var appTabBar: UITabBar!
-    
-    @IBOutlet weak var albumButton: UITabBarItem!
-    
-    @IBOutlet weak var songsButton: UITabBarItem!
-    
-    @IBOutlet weak var artistButton: UITabBarItem!
-    
     @IBOutlet weak var navBar: UINavigationBar!
     
     var music : [Music] = []
     var songQuery = MPMediaQuery.songs()
     var songList : [MPMediaItem]!
-    var musicPlayer = MPMusicPlayerController.applicationMusicPlayer
+    var audioPlayer : AVAudioPlayer!
+    var musicURL : URL!
     var currentIndex = 0;
     var currentTitle = ""
     var currentId = 0
     var songPredicate = MPMediaPropertyPredicate()
-    var artworkSize = CGSize(width: 49, height: 49)
+    var miniArtworkSize = CGSize(width: 49, height: 49)
+    var maxArtworkSize = CGSize(width: 200, height: 200)
+    var minAlbumArtwork = UIImage()
+    var maxAlbumArtwork = UIImage()
     
     
     override func viewDidLoad() {
@@ -67,8 +63,21 @@ class MusicListView: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.expandPlayer))
+        floatingPlayer.addGestureRecognizer(gesture)
     }
-
+    
+    @objc func expandPlayer(sender : UITapGestureRecognizer) {
+        print("Expanding UI")
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "NowPlayingUI") as! NowPlayingViewController
+        controller.track = currentTitle
+        controller.album = maxAlbumArtwork
+        self.present(controller, animated: true, completion: nil)
+        print("Success")
+        
+    }
     
     func roundImages(image : UIImageView) {
         image.layer.cornerRadius = 6.0
@@ -101,13 +110,13 @@ class MusicListView: UIViewController {
     
     func accessMusicLibrary(){
         songList = songQuery.items! as [MPMediaItem]
-        for song in songList {
-            print(song.title)
-        }
+        print("\(songList.count) songs loaded")
     }
     
     func findMusic(id : Int) -> String {
         currentTitle = songList[id].title!
+        minAlbumArtwork = (songList[id].artwork?.image(at: miniArtworkSize))!
+        maxAlbumArtwork = (songList[id].artwork?.image(at: CGSize(width: 200, height: 200)))!
         return currentTitle
     }
     
@@ -123,11 +132,16 @@ class MusicListView: UIViewController {
             print("Playing now")
         }
         songList = songQuery.items! as [MPMediaItem]
-        musicPlayer.setQueue(with: MPMediaItemCollection(items: songList))
-        
+        let musicURL = songQuery.items?.first?.value(forProperty: MPMediaItemPropertyAssetURL) as? URL
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: musicURL!)
+            audioPlayer.prepareToPlay()
+        } catch {
+            print(error)
+        }
         setupFloatingPlayer(currentTitle: title, currentImage: albumArtwork)
         mediaButtonStatic.setImage(#imageLiteral(resourceName: "pause.png"), for: .normal)
-        musicPlayer.play()
+        audioPlayer.play()
     }
     
     func setupFloatingPlayer(currentTitle : String, currentImage : UIImage) {
@@ -139,7 +153,7 @@ class MusicListView: UIViewController {
     func createArray() -> [Music] {
         var tempMusic : [Music] = []
         for song in songList {
-            tempMusic.append(Music(image: (song.artwork?.image(at: artworkSize))!, title: song.title!))
+            tempMusic.append(Music(image: (song.artwork?.image(at: miniArtworkSize))!, title: song.title!))
         }
         return tempMusic
     }
@@ -169,7 +183,7 @@ extension MusicListView: UITableViewDataSource, UITableViewDelegate {
         print("didSelect  \(indexPath.row)")
         currentTitle = findMusic(id: indexPath.row)
         print(currentTitle)
-        playSong(title: currentTitle, albumArtwork: (songList[indexPath.row].artwork?.image(at: artworkSize))!)
+        playSong(title: currentTitle, albumArtwork: (minAlbumArtwork))
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

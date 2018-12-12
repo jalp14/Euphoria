@@ -23,4 +23,5 @@ class NowPlayingView : UIViewController {
         super.viewDidLoad()
     }
     
+    
 }
