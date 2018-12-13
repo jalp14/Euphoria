@@ -37,13 +37,33 @@ class NowPlayingViewController : UIViewController {
         }
     }
     
+    
+    @IBOutlet weak var trackDuration: UIProgressView!
+    @IBOutlet weak var albumName: UILabel!
+    
+    @IBAction func playButton(_ sender: Any) {
+    }
+    
+    
+    @IBAction func prevButton(_ sender: Any) {
+    }
+    
+    @IBAction func nextButton(_ sender: Any) {
+    }
+    
+    @IBAction func volumeSlider(_ sender: Any) {
+    }
+    
+    
     var track : String = "Not Playing"
     var album : UIImage = UIImage()
+    var albumTitle : String = "Album"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         currentTrack.text = track
         albumArtwork.image = album
+        albumName.text = albumTitle
     }
 
      required init?(coder aDecoder: NSCoder) {

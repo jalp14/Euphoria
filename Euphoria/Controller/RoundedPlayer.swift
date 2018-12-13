@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-@IBDesignable
 class RoundedPlayer : UIView {
     
     @IBInspectable var borderWidth: CGFloat = 0.0 {

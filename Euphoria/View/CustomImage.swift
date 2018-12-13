@@ -8,7 +8,6 @@
 
 import UIKit
 
-@IBDesignable
 class CustomImage: UIImageView {
     
     override init(image: UIImage?) {
@@ -31,7 +30,7 @@ class CustomImage: UIImageView {
         
         // Radii stuff
         self.layer.cornerRadius = 9.0
-        self.layer.masksToBounds = false
+        self.layer.masksToBounds = true
     }
 
 }
