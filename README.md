@@ -9,7 +9,7 @@ Display Music library in a list -> Done!
 
 Setup floating player to show current track -> Done!
 
-Tap to expand floating player -> In Progress
+Tap to expand floating player -> Done!
 
 Implement Now Playing UI -> Pending
 
