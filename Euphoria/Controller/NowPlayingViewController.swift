@@ -14,6 +14,8 @@ class NowPlayingViewController : UIViewController {
     @IBOutlet weak var albumArtwork: UIImageView!
     @IBOutlet weak var currentTrack: UILabel!
     
+    var musicControl : ((_ sender : UIButton) -> ())?
+    
     var initialTouchPoint : CGPoint = CGPoint(x: 0, y: 0)
     
     @IBAction func dismissNowPlayingUI(_ sender: UIPanGestureRecognizer) {
@@ -41,7 +43,8 @@ class NowPlayingViewController : UIViewController {
     @IBOutlet weak var trackDuration: UIProgressView!
     @IBOutlet weak var albumName: UILabel!
     
-    @IBAction func playButton(_ sender: Any) {
+    @IBAction func playButton(_ sender: UIButton) {
+        musicControl?(sender)
     }
     
     
@@ -58,6 +61,7 @@ class NowPlayingViewController : UIViewController {
     var track : String = "Not Playing"
     var album : UIImage = UIImage()
     var albumTitle : String = "Album"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -25,16 +25,9 @@ class MusicListView: UIViewController {
     @IBOutlet weak var currentPlayingTitle: UILabel!
     
     @IBAction func mediaButton(_ sender: UIButton) {
-        if (audioPlayer.prepareToPlay()) {
-            if (audioPlayer.isPlaying) {
-                audioPlayer.pause()
-                sender.setImage(#imageLiteral(resourceName: "play"), for: .normal)
-            } else if !(audioPlayer.isPlaying) {
-                audioPlayer.play()
-                sender.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
-            }
-        }
+        controlMusic(sender)
     }
+    
     
     @IBOutlet weak var mediaButtonStatic: UIButton!
     
@@ -77,6 +70,21 @@ class MusicListView: UIViewController {
         self.present(controller, animated: true, completion: nil)
         print("Success")
         
+        controller.musicControl = { sender in
+            self.controlMusic(sender)
+        }
+    }
+    
+    func controlMusic(_ sender: UIButton) {
+        if (audioPlayer.prepareToPlay()) {
+            if (audioPlayer.isPlaying) {
+                audioPlayer.pause()
+                sender.setImage(#imageLiteral(resourceName: "play"), for: .normal)
+            } else if !(audioPlayer.isPlaying) {
+                audioPlayer.play()
+                sender.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
+            }
+        }
     }
     
     func roundImages(image : UIImageView) {
