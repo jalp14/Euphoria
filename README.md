@@ -5,8 +5,8 @@ A Music app written in Swift
 
 # Plan 2018 - 2019
 
-Well I did not anticipate that my group project will takme most of my time -_-
-And now I have exams :|
+Well I did not anticipate that my group project will take most of my time -_-
+And now I have exams greattt :|
 
 Development will continue after my exams 
 
