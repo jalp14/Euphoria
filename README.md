@@ -5,6 +5,11 @@ A Music app written in Swift
 
 # Plan 2018 - 2019
 
+Well I did not anticipate that my group project will takme most of my time -_-
+And now I have exams :|
+
+Development will continue after my exams 
+
 Display Music library in a list -> Done!
 
 Setup floating player to show current track -> Done!
