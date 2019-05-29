@@ -161,6 +161,7 @@ class MusicListView: UIViewController {
     func createArray() -> [Music] {
         var tempMusic : [Music] = []
         for song in songList {
+            // Add a check for songs with no album artwork
             tempMusic.append(Music(image: (song.artwork?.image(at: miniArtworkSize))!, title: song.title!))
         }
         return tempMusic
